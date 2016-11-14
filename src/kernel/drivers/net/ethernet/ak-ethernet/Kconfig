@@ -1,6 +1,0 @@
-config AK_ETHERNET
-	tristate "Anyka Ethernet support"
-	depends on ARCH_AK39
-	help
-	  Anyka  Ethernet device support
-
