@@ -3,14 +3,14 @@
 build_tools()
 {
     echo Updating package list...
-    $APT_GET update
+    #$APT_GET update
 
     echo Installing tools...
-    $APT_GET install lzop zip
+    #$APT_GET install lzop zip
 
     if [ `uname -m` == 'x86_64' ]; then
         echo Installing 32bit libraries...
-        $APT_GET install --force-yes ia32-libs ia32-libs-multiarch liblzo2-2:i386 liblzma5:i386
+    #    $APT_GET install --force-yes ia32-libs ia32-libs-multiarch liblzo2-2:i386 liblzma5:i386
     fi
 
     if [ ! -d $DEV_ROOT/compiler/arm-2009q3 ]; then
@@ -47,10 +47,10 @@ build_kernel()
     $MAKE O=$DEV_ROOT/output/kernel LOCALVERSION= -j$NCPU modules
     $MAKE O=$DEV_ROOT/output/kernel LOCALVERSION= -j$NCPU modules_prepare
 
-    cd $DEV_ROOT/src/kernel/drivers/net/wireless/rtl8188EUS_rtl8189ES
-    $MAKE -j$NCPU KSRC=$DEV_ROOT/output/kernel modules
-    $MAKE -j$NCPU KSRC=$DEV_ROOT/output/kernel strip
-    $CP 8188eu.ko $DEV_ROOT/src/librootfs/akwifilib/root
+    #cd $DEV_ROOT/src/kernel/drivers/net/wireless/rtl8188EUS_rtl8189ES
+    #$MAKE -j$NCPU KSRC=$DEV_ROOT/output/kernel modules
+    #$MAKE -j$NCPU KSRC=$DEV_ROOT/output/kernel strip
+    #$CP 8188eu.ko $DEV_ROOT/src/librootfs/akwifilib/root
 }
 
 clean_kernel()
@@ -61,8 +61,8 @@ clean_kernel()
     # restore kernel/lib/libakaec.a and kernel/lib/libfha.a
     git checkout lib
 
-    cd $DEV_ROOT/src/kernel/drivers/net/wireless/rtl8188EUS_rtl8189ES
-    $MAKE -j$NCPU KSRC=$DEV_ROOT/output/kernel clean
+    #cd $DEV_ROOT/src/kernel/drivers/net/wireless/rtl8188EUS_rtl8189ES
+    #$MAKE -j$NCPU KSRC=$DEV_ROOT/output/kernel clean
 }
 
 config_busybox()
@@ -182,42 +182,42 @@ clean_samples()
     $MAKE clean
 }
 
-build_node()
-{
-    echo Building node...
-    cd $DEV_ROOT/src/node
+# build_node()
+# {
+#     echo Building node...
+#     cd $DEV_ROOT/src/node
 
-    AR=arm-none-linux-gnueabi-ar \
-    CC=arm-none-linux-gnueabi-gcc \
-    CXX=arm-none-linux-gnueabi-g++ \
-    LINK=arm-none-linux-gnueabi-g++ \
-        ./configure \
-            --without-snapshot \
-            --dest-cpu=arm --dest-os=linux
+#     AR=arm-none-linux-gnueabi-ar \
+#     CC=arm-none-linux-gnueabi-gcc \
+#     CXX=arm-none-linux-gnueabi-g++ \
+#     LINK=arm-none-linux-gnueabi-g++ \
+#         ./configure \
+#             --without-snapshot \
+#             --dest-cpu=arm --dest-os=linux
 
-    if [ -z $VERBOSE ]; then
-        $MAKE -j$NCPU V=
-    else
-        $MAKE -j$NCPU
-    fi
+#     if [ -z $VERBOSE ]; then
+#         $MAKE -j$NCPU V=
+#     else
+#         $MAKE -j$NCPU
+#     fi
 
-    $STRIP $DEV_ROOT/src/node/out/Release/node
-    $CP $DEV_ROOT/src/node/out/Release/node $DEV_ROOT/output/local/bin
-}
+#     $STRIP $DEV_ROOT/src/node/out/Release/node
+#     $CP $DEV_ROOT/src/node/out/Release/node $DEV_ROOT/output/local/bin
+# }
 
-clean_node()
-{
-    echo Cleaning node...
-    cd $DEV_ROOT/src/node
-    $MAKE distclean
-    $RM deps/v8/tools/jsmin.pyc
-    $RM tools/gyp/pylib/gyp/__init__.pyc
-    $RM tools/gyp/pylib/gyp/common.pyc
-    $RM tools/gyp/pylib/gyp/generator/__init__.pyc
-    $RM tools/gyp/pylib/gyp/generator/make.pyc
-    $RM tools/gyp/pylib/gyp/input.pyc
-    $RM tools/gyp/pylib/gyp/xcode_emulation.pyc
-}
+# clean_node()
+# {
+#     echo Cleaning node...
+#     cd $DEV_ROOT/src/node
+#     $MAKE distclean
+#     $RM deps/v8/tools/jsmin.pyc
+#     $RM tools/gyp/pylib/gyp/__init__.pyc
+#     $RM tools/gyp/pylib/gyp/common.pyc
+#     $RM tools/gyp/pylib/gyp/generator/__init__.pyc
+#     $RM tools/gyp/pylib/gyp/generator/make.pyc
+#     $RM tools/gyp/pylib/gyp/input.pyc
+#     $RM tools/gyp/pylib/gyp/xcode_emulation.pyc
+# }
 
 build_updater()
 {
@@ -272,14 +272,14 @@ build_all()
     $MKDIR $DEV_ROOT/output/local/lib
     config_kernel
     build_kernel
-    config_busybox
-    build_busybox
-    build_rootfs
-    build_samples
-    build_node
-    build_updater
-    pack_basic
-    pack_extra
+    #config_busybox
+    #build_busybox
+    #build_rootfs
+    #build_samples
+    #build_node
+    #build_updater
+    #pack_basic
+    #pack_extra
 }
 
 clean_all()
