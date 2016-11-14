@@ -1,42 +1,10 @@
 # Lamobo-D1 Development Environment
 
-## The Latest Build
+I'm changing a bunch of stuff around so it's a little easier for me to play with.
+I don't really know what I'm doing, but current goals are:
 
-[![Build Status](https://drone.io/github.com/Lamobo/Lamobo-D1/status.png)](https://drone.io/github.com/Lamobo/Lamobo-D1/latest) [Download](https://drone.io/github.com/Lamobo/Lamobo-D1/files)
-
-## Firmware Build Steps
-
-0. Tested OS
-
-    - Ubuntu 12.04.3 32Bit
-    - Ubuntu 12.04.3 64Bit
-
-1. Clone
-
-    ```
-    cd ~
-    git clone https://github.com/Lamobo/Lamobo-D1.git
-    ```
-
-2. Build
-
-    ```
-    ~/Lamobo-D1/build/build.sh
-    ```
-
-3. Check
-
-    ```
-    cd ~/Lamobo-D1/output
-    ls -l D1_Basic*.zip
-    ls -l D1_Extra*.zip
-    ```
-
-4. Clean
-
-    ```
-    ~/Lamobo-D1/build/build.sh clean
-    ```
+- Upgrade to more current kernel
+- Implement a usb video device
 
 ## Firmware Flash Steps
 
